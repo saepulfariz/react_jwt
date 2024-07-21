@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -8,20 +9,34 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8080/api/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
+    // const response = await fetch("http://localhost:8080/api/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({ username, password }),
+    // });
+    // const data = await response.json();
+    // const requestOptions = {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ username, password }),
+    //   };
+    //   fetch("http://localhost:8080/api/login", requestOptions)
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     });
+    // if (data.token) {
+    //   localStorage.setItem("token", data.token);
+    //   navigate("/dashboard");
+    // } else {
+    //   alert("Login failed");
+    // }
+    const login = { username, password };
+    axios.post("http://localhost:8080/api/login", login).then((response) => {
+      console.log(response);
     });
-    const data = await response.json();
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      navigate("/dashboard");
-    } else {
-      alert("Login failed");
-    }
   };
 
   return (
