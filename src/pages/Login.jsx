@@ -18,25 +18,50 @@ const Login = () => {
     // });
     // const data = await response.json();
     // const requestOptions = {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({ username, password }),
-    //   };
-    //   fetch("http://localhost:8080/api/login", requestOptions)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     });
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ username, password }),
+    // };
+    // fetch("http://localhost:8080/api/login", requestOptions)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
     // if (data.token) {
     //   localStorage.setItem("token", data.token);
     //   navigate("/dashboard");
     // } else {
     //   alert("Login failed");
     // }
-    const login = { username, password };
-    axios.post("http://localhost:8080/api/login", login).then((response) => {
-      console.log(response);
-    });
+    // const login = { username, password };
+    // axios.post("http://localhost:8080/api/login", login).then((response) => {
+    //   console.log(response);
+    // });
+
+    // Make a request for a user with a given ID
+    axios
+      .get(
+        "http://localhost:8080/api/login?username=" +
+          username +
+          "&password=" +
+          password
+      )
+      .then(function (response) {
+        // handle success
+        var data = response.data;
+
+        localStorage.setItem("accessToken", data.data.accessToken);
+        localStorage.setItem("refreshToken", data.data.refreshToken);
+        navigate("/dashboard");
+      })
+      .catch(function () {
+        // handle error
+        // console.log(error);
+        alert("Login failed");
+      })
+      .finally(function () {
+        // always executed
+      });
   };
 
   return (
