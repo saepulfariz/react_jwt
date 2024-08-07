@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -41,10 +43,7 @@ const Login = () => {
     // Make a request for a user with a given ID
     axios
       .get(
-        "http://localhost:8080/api/login?username=" +
-          username +
-          "&password=" +
-          password
+        API_URL + "/api/login?username=" + username + "&password=" + password
       )
       .then(function (response) {
         // handle success
