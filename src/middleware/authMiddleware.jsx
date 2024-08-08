@@ -28,7 +28,7 @@ const AuthMiddleware = ({ children, roles }) => {
   }, [token]);
 
   if (!token) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
 
   if (userRole && roles && !roles.includes(userRole)) {

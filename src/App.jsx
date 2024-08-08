@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
-import Logout from "./pages/Login";
+import Logout from "./pages/Logout";
 import Dashboard from "./pages/Dashboard";
 
 // import { ProtectedRoutes } from "./middleware/ProtectedRoutes";
