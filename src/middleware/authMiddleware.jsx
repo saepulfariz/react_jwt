@@ -1,12 +1,11 @@
 import React from "react";
-import { Navigate, useNavigate, redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 const AuthMiddleware = ({ children, roles }) => {
   const token = localStorage.getItem("accessToken");
   const [userRole, setUserRole] = React.useState(null);
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (token) {

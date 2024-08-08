@@ -3,7 +3,8 @@ import Login from "./pages/Login";
 import Logout from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 
-import { ProtectedRoutes } from "./middleware/ProtectedRoutes";
+// import { ProtectedRoutes } from "./middleware/ProtectedRoutes";
+import AuthMiddleware from "./middleware/authMiddleware";
 
 const router = createBrowserRouter([
   {
@@ -18,19 +19,24 @@ const router = createBrowserRouter([
     path: "/logout",
     element: <Logout />,
   },
-  // {
-  //   path: "/dashboard",
-  //   element: <Dashboard />,
-  // },
   {
-    element: <ProtectedRoutes />,
-    children: [
-      {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-    ],
+    path: "/dashboard",
+    element: (
+      // <AuthMiddleware roles={["administrator"]}>
+      <AuthMiddleware>
+        <Dashboard />
+      </AuthMiddleware>
+    ),
   },
+  // {
+  //   element: <ProtectedRoutes />,
+  //   children: [
+  //     {
+  //       path: "/dashboard",
+  //       element: <Dashboard />,
+  //     },
+  //   ],
+  // },
 ]);
 
 const App = () => {
