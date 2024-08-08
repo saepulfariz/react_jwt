@@ -1,7 +1,8 @@
 import React from 'react';
 import {
     Navigate,
-    useNavigate
+    useNavigate,
+    redirect
 } from 'react-router-dom';
 
 const API_URL =
@@ -39,12 +40,12 @@ const AuthMiddleware = ({
 
     if (!token) {
         // return <Navigate to = "/" / > ;
-        return navigate("/");
+        return redirect("/");
     }
 
     if (userRole && roles && !roles.includes(userRole)) {
         // return <Navigate to = "/dashboard" / > ;
-        return navigate("/");
+        return redirect("/");
     }
 
     return children;
