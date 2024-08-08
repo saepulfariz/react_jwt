@@ -13,19 +13,19 @@ const router = createBrowserRouter([
     path: "/login",
     element: <Login />,
   },
-  {
-    path: "/dashboard",
-    element: <Dashboard />,
-  },
   // {
-  //   element: <ProtectedRoutes />,
-  //   children: [
-  //     {
-  //       path: "/dashboard",
-  //       element: <Dashboard />,
-  //     },
-  //   ],
+  //   path: "/dashboard",
+  //   element: <Dashboard />,
   // },
+  {
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+    ],
+  },
 ]);
 
 const App = () => {
