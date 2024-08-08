@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./pages/Login";
 import Logout from "./pages/Logout";
 import Dashboard from "./pages/Dashboard";
+import Products from "./pages/Products";
 
 // import { ProtectedRoutes } from "./middleware/ProtectedRoutes";
 import AuthMiddleware from "./middleware/authMiddleware";
@@ -25,6 +26,14 @@ const router = createBrowserRouter([
       // <AuthMiddleware roles={["administrator"]}>
       <AuthMiddleware>
         <Dashboard />
+      </AuthMiddleware>
+    ),
+  },
+  {
+    path: "/products",
+    element: (
+      <AuthMiddleware roles={["administrator", "member"]}>
+        <Products />
       </AuthMiddleware>
     ),
   },

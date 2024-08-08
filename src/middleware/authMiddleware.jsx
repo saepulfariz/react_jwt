@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -12,6 +13,7 @@ const AuthMiddleware = ({ children, roles }) => {
       fetch(API_URL + "/api/me", {
         headers: {
           Authorization: `Bearer ${token}`,
+          mode: "cors",
         },
       })
         .then((response) => response.json())
@@ -21,6 +23,23 @@ const AuthMiddleware = ({ children, roles }) => {
         .catch((error) => {
           console.error("Error fetching user role:", error);
           setUserRole(null);
+        });
+
+      axios
+        .get(API_URL + "/api/me", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+            mode: "cors",
+          },
+        })
+        .then((response) => {
+          // Handle success
+          console.log(response.data);
+        })
+        .catch((error) => {
+          // Handle error
+          console.error(error);
         });
     } else {
       setUserRole(null);
